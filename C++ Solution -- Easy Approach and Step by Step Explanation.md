@@ -1,10 +1,10 @@
 ## 01. C++ Solution || Easy Approach and Step by Step Explanation
 
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/sum-of-all-sub-sequences-of-a-number3437/1)
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1)
 
 ### Problem Description
 
-**Task:** Given a string s which consists of digits, find sum of all digits across all non-empty subsequences of s.Note: Since the answer can be very large, return it modulo 10⁹ + 7.Examples:Input: s = "123"
+**Task:** Given two integers l and r, find the bitwise XOR of all integers in the range [l, r] (both inclusive).Examples:Input: l = 4, r = 8
 
 #### Examples
 
@@ -12,85 +12,36 @@ The problem can be found at the following link: [Question Link](https://www.geek
 
 - **Output:**
 ```text
-24
+5
 ```
-- **Explanation:** The non-empty subsequences are: [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]. The sum of all digits in these subsequences is: 1 + 2 + 3 + (1 + 2) + (1 + 3) + (2 + 3) + (1 + 2 + 3) = 24.
-
-##### Example 2
-
-- **Input:**
-```text
-s = "405"
-```
-- **Output:**
-```text
-36
-```
-- **Explanation:** The non-empty subsequences are: [4], [0], [5], [4, 0], [4, 5], [0, 5], [4, 0, 5]. The sum of all digits in these subsequences is 36.
+- **Explanation:** The XOR of all integers from 5 to 9 is (5 xor 6 xor 7 xor 8 xor 9) = 5.Constraints:1 ≤ l ≤ r ≤ 10⁹
 
 ### Time and Auxiliary Space Complexity
 
-- **Expected Time Complexity:** O(|s|)
+- **Expected Time Complexity:** O(1)
 - **Expected Auxiliary Space Complexity:** O(1)
 
-### Accepted Solutions (2)
+### Accepted Solutions (1)
 
 #### Solution 1 (C++)
 
-- **Submitted:** 2026-11-15 08:02:59
-- **Status:** Correct
-- **Marks:** 0
-
-```cpp
-class Solution {
-public:
-    int subsequenceSum(string &s) {
-        const long long MOD = 1e9 + 7;
-
-        long long sum = 0;
-        int n = s.size();
-
-        for (char c : s) {
-            sum = (sum + (c - '0')) % MOD;
-        }
-
-        long long power = 1;
-        for (int i = 0; i < n - 1; i++) {
-            power = (power * 2) % MOD;
-        }
-
-        return (sum * power) % MOD;
-    }
-};
-```
-
-#### Solution 2 (C++)
-
-- **Submitted:** 2026-11-15 08:02:06
+- **Submitted:** 2026-11-18 09:13:35
 - **Status:** Correct
 - **Marks:** 2
 
 ```cpp
 class Solution {
 public:
-    int subsequenceSum(string &s) {
-        const long long MOD = 1e9 + 7;
-
-        long long sum = 0;
-        int n = s.size();
-
-        for (char c : s) {
-            sum = (sum + (c - '0')) % MOD;
-        }
-
-        long long power = 1;
-        for (int i = 0; i < n - 1; i++) {
-            power = (power * 2) % MOD;
-        }
-
-        return (sum * power) % MOD;
+    int findXOR(int l, int r) {
+        auto f = [](int n) {
+            if(n % 4 == 0) return n;
+            if(n % 4 == 1) return 1;
+            if(n % 4 == 2) return n + 1;
+            return 0;
+        };
+        return f(r) ^ f(l - 1);
     }
 };
 ```
 
-*Generated on: 11/15/2026, 8:04:57 AM*
+*Generated on: 11/18/2026, 9:15:09 AM*
