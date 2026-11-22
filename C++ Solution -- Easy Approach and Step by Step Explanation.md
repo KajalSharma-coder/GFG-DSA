@@ -1,10 +1,10 @@
 ## 01. C++ Solution || Easy Approach and Step by Step Explanation
 
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1)
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/longest-subarray-with-sum-divisible-by-k1259/1)
 
 ### Problem Description
 
-**Task:** Given two integers l and r, find the bitwise XOR of all integers in the range [l, r] (both inclusive).Examples:Input: l = 4, r = 8
+**Task:** Given an array arr[] and a positive integer k, find the length of the longest subarray with the sum of the elements divisible by k.Note: If there is no subarray with sum divisible by k, then return 0.Examples :Input: arr[] = [2, 7, 6, 1, 4, 5], k = 3
 
 #### Examples
 
@@ -12,36 +12,50 @@ The problem can be found at the following link: [Question Link](https://www.geek
 
 - **Output:**
 ```text
-5
+2
 ```
-- **Explanation:** The XOR of all integers from 5 to 9 is (5 xor 6 xor 7 xor 8 xor 9) = 5.Constraints:1 ≤ l ≤ r ≤ 10⁹
+- **Explanation:** The subarray is [2, -2] has sum = 0, which is divisible by 2.
 
 ### Time and Auxiliary Space Complexity
 
-- **Expected Time Complexity:** O(1)
-- **Expected Auxiliary Space Complexity:** O(1)
+- **Expected Time Complexity:** O(n)
+- **Expected Auxiliary Space Complexity:** O(min(n, k))
 
 ### Accepted Solutions (1)
 
 #### Solution 1 (C++)
 
-- **Submitted:** 2026-11-18 09:13:35
+- **Submitted:** 2026-11-22 09:17:55
 - **Status:** Correct
-- **Marks:** 2
+- **Marks:** 4
 
 ```cpp
 class Solution {
 public:
-    int findXOR(int l, int r) {
-        auto f = [](int n) {
-            if(n % 4 == 0) return n;
-            if(n % 4 == 1) return 1;
-            if(n % 4 == 2) return n + 1;
-            return 0;
-        };
-        return f(r) ^ f(l - 1);
+    int longestSubarrayDivK(vector<int>& arr, int k) {
+        unordered_map<int, int> mp;
+
+        mp[0] = -1;
+
+        long long sum = 0;
+        int ans = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            sum += arr[i];
+
+            int rem = ((sum % k) + k) % k;
+
+            if (mp.find(rem) != mp.end()) {
+                ans = max(ans, i - mp[rem]);
+            }
+            else {
+                mp[rem] = i;
+            }
+        }
+
+        return ans;
     }
 };
 ```
 
-*Generated on: 11/18/2026, 9:15:09 AM*
+*Generated on: 11/22/2026, 9:19:14 AM*
