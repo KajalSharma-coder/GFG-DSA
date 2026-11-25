@@ -15,7 +15,7 @@ The problem can be found at the following link: [Question Link](https://www.geek
 
 #### Solution 1 (C++)
 
-- **Submitted:** 2026-11-25 23:25:23
+- **Submitted:** 2026-11-25 23:30:39
 - **Status:** Correct
 - **Marks:** 8
 
@@ -88,4 +88,4 @@ public:
 };
 ```
 
-*Generated on: 11/25/2026, 11:26:43 PM*
+*Generated on: 11/25/2026, 11:31:10 PM*
